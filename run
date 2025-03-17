@@ -24,11 +24,11 @@ python3 -m venv venv_reforge;
 source venv_reforge/bin/activate;
 pip3 install -r requirements.txt;
 pip3 install -U --no-cache-dir jupyterlab jupyterlab_widgets ipykernel ipywidgets;
-useradd -m -s /bin/zsh gsk;
-echo "gsk:Shitfuck" | chpasswd;
-usermod -aG sudo gsk;
-su - gsk -c 'sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"';
-sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config;
+#useradd -m -s /bin/zsh gsk;
+#echo "gsk:Shitfuck" | chpasswd;
+#usermod -aG sudo gsk;
+#su - gsk -c 'sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"';
+#sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config;
 service sshd restart;
 cd /workspace/reforge;
 source venv_reforge/bin/activate && ./webui.sh --listen --port 7860 --user gsk --password Shitfuck &
