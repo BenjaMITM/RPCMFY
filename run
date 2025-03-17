@@ -15,70 +15,14 @@ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/
 dpkg -i cuda-keyring_1.1-1_all.deb;
 apt-get update;
 apt-get install -y cuda-toolkit;
-wget https://bootstrap.pypa.io/get-pip.py -O get-pip.py;
-python3 get-pip.py;
-rm get-pip.py;
+#wget https://bootstrap.pypa.io/get-pip.py -O get-pip.py;
+#python3 get-pip.py;
+#rm get-pip.py;
 git clone https://github.com/Panchovix/stable-diffusion-webui-reForge.git /workspace/reforge;
 cd /workspace/reforge;
 python3 -m venv venv_reforge;
 source venv_reforge/bin/activate;
-pip install -r requirements.txt;
-cat <<'EOF' > download_models.sh
-cd /workspace/reforge/models/Stable-diffusion;
-axel "https://civitai.com/api/download/models/934796?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1417791?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1407095?type=Model&format=SafeTensor&size=full&fp=bf16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1241144?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1449179?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/947488?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1251918?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1193361?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1041855?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/720355?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1475139?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/429359?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1372996?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1234200?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/834838?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/951424?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1221206?type=Model&format=SafeTensor&size=pruned&fp=fp32&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/423235?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/714801?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1514644?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/998694?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/522165?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/1097040?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/738965?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/930779?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/421137?type=Model&format=SafeTensor&size=full&fp=fp32&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/515453?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/395107?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/345685?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/299716?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/958003?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"\;
-axel "https://civitai.com/api/download/models/360292?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2";
-axel "https://civitai.com/api/download/models/239965?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2";
-axel "https://civitai.com/api/download/models/846897?type=Model&format=SafeTensor&size=full&fp=fp32&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2";
-axel "https://civitai.com/api/download/models/353861?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2";
-axel "https://civitai.com/api/download/models/199541?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2";
-axel "https://civitai.com/api/download/models/990314?type=Model&format=SafeTensor&size=pruned&fp=fp8&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2";
-EOF
-chmod +x download_models.sh;
-./download_models.sh;
-# Download VAEs for ReForge
-cd /workspace/reforge/models/VAE;
-axel "https://civitai.com/api/download/models/239965?type=VAE&format=SafeTensor&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2";
-axel "https://civitai.com/api/download/models/395107?type=VAE&format=SafeTensor&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2";
-axel "https://civitai.com/api/download/models/714801?type=VAE&format=SafeTensor&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2";
-axel "https://civitai.com/api/download/models/711305?type=Model&format=SafeTensor&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2";
-cd /workspace/models/text_encoder;
-axel "https://civitai.com/api/download/models/822016?type=Model&format=SafeTensor&size=full&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2";
-# Download Embeddings for ReForge
-#mkdir -p /workspace/reforge/embeddings;
-#cd /workspace/reforge/embeddings;
-#axel "https://civitai.com/api/download/models/1153212?type=Negative&format=Other&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"
-#axel "https://civitai.com/api/download/models/1153237?type=Model&format=SafeTensor&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"
-#axel "https://civitai.com/api/download/models/1273458?type=Model&format=SafeTensor&size=pruned&fp=fp16&?&token=9dca6f30e0b52ae663be7ffb0e15a4c2"
+pip3 install -r requirements.txt;
 pip3 install -U --no-cache-dir jupyterlab jupyterlab_widgets ipykernel ipywidgets;
 useradd -m -s /bin/zsh gsk;
 echo "gsk:Shitfuck" | chpasswd;
@@ -93,7 +37,7 @@ git clone https://github.com/comfyanonymous/ComfyUI.git comfyui;
 cd comfyui;
 python3 -m venv venv_comfy;
 source venv_comfy/bin/activate;
-pip install -r requirements.txt;
+pip3 install -r requirements.txt;
 python main.py --listen --port 8188 &;
 jupyter lab --allow-root --no-browser --port=8888 --ip=* --ServerApp.terminado_settings="{\"shell_command\":[\"/bin/bash\"]}" --ServerApp.token=$JUPYTER_PASSWORD --ServerApp.allow_origin=* --FileContentsManager.preferred_dir=/workspace;
 sleep infinity;
